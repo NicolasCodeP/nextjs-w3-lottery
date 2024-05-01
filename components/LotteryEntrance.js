@@ -45,14 +45,14 @@ export default function LotteryEntrance() {
     const { runContractFunction: getPlayersNumber } = useWeb3Contract({
         abi: abi,
         contractAddress: raffleAddress,
-        functionName: "getNumberOfPlayers",
+        functionName: "getSizePlayers",
         params: {},
     })
 
     const { runContractFunction: getRecentWinner } = useWeb3Contract({
         abi: abi,
         contractAddress: raffleAddress,
-        functionName: "getRecentWinner",
+        functionName: "recentWinner",
         params: {},
     })
 
@@ -64,7 +64,7 @@ export default function LotteryEntrance() {
         //     ...options,
         // })
         const entranceFeeFromCall = (await getEntranceFee()).toString()
-        const numPlayersFromCall = (await getPlayersNumber()).toString()
+        const numPlayersFromCall = await getPlayersNumber()
         const recentWinnerFromCall = await getRecentWinner()
         setEntranceFee(entranceFeeFromCall)
         setNumberOfPlayers(numPlayersFromCall)
